@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import NewsCard from "./NewsCard";
-import Navbar from "./Navbar"; // Import the Navbar component
+import Navbar from "./Navbar";
 
 export class News extends Component {
   constructor() {
     super();
-    this.state = { articles: [], loading: false, category: "general" }; // Add category to state
+    this.state = { 
+      articles: [], 
+      loading: false, 
+      category: "general", 
+      categoryViews: { general: 0, business: 0, sports: 0, technology: 0, health: 0, science: 0 }
+    }; // Track category views
   }
 
-  // Fetch news based on the selected category
   fetchNews = async (category) => {
     this.setState({ loading: true });
     let apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6a8c53491d80475ca792b5cf5217f256`;
@@ -18,19 +22,35 @@ export class News extends Component {
   };
 
   componentDidMount() {
-    this.fetchNews(this.state.category); // Fetch default category news on mount
+    this.fetchNews(this.state.category); // Fetch default category news
   }
 
   handleCategoryChange = (category) => {
-    this.setState({ category }, () => {
-      this.fetchNews(category); // Fetch news when category changes
+    if (category === "recommended") {
+      category = this.getMostViewedCategory(); // Set to the most viewed category
+    }
+    
+    // Update category views count
+    this.setState(prevState => ({
+      category,
+      categoryViews: {
+        ...prevState.categoryViews,
+        [category]: prevState.categoryViews[category] + 1,
+      }
+    }), () => {
+      this.fetchNews(category);
     });
   };
+
+  getMostViewedCategory = () => {
+    const { categoryViews } = this.state;
+    return Object.keys(categoryViews).reduce((a, b) => categoryViews[a] > categoryViews[b] ? a : b);
+  }
 
   render() {
     return (
       <div>
-        <Navbar handleCategoryChange={this.handleCategoryChange} /> {/* Pass the method as prop */}
+        <Navbar handleCategoryChange={this.handleCategoryChange} /> {/* Pass handleCategoryChange */}
         <div className="container my-3">
           <h2>News App - {this.state.category.toUpperCase()} News</h2>
           <div className="row">

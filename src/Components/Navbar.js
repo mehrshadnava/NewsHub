@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export class Navbar extends Component {
   render() {
-    const { handleCategoryChange } = this.props; // Receive the prop for category change
+    const { handleCategoryChange } = this.props;
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,6 +52,11 @@ export class Navbar extends Component {
                 <a className="nav-link" href="#" onClick={() => handleCategoryChange("science")}>
                   Science
                 </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => handleCategoryChange("recommended")}>
+                 <b> Recommended</b>
+                </a> {/* New Recommended link */}
               </li>
             </ul>
           </div>
