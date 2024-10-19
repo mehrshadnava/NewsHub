@@ -26,7 +26,7 @@ export class Translate extends Component {
 
   render() {
     return (
-      <div className="container-fluid position-fixed" style={{ top: '70px', right: '10px', zIndex: 1000 }}>
+      <div className="container-fluid position-fixed" style={{ bottom: '70px', right: '10px', zIndex: 1000 }}>
         <div className="card" style={{ maxWidth: '200px', backgroundColor: 'white', padding: '10px', borderRadius: '5px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' }}>
           <div className="card-body text-center">
             <h6 className="card-title">Translate this page</h6>

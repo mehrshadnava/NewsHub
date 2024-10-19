@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewsCard from "./NewsCard";
 import Navbar from "./Navbar";
-import SidePanel from "./SidePanel"; // Import SidePanel
+import SidePanel from "./SidePanel"; 
 
 export class News extends Component {
   constructor() {
@@ -11,23 +11,28 @@ export class News extends Component {
       loading: false, 
       category: "general", 
       author: "",
-      categoryViews: { general: 0, business: 0, sports: 0, technology: 0, health: 0, science: 0 }
+      categoryViews: { general: 0, business: 0, sports: 0, technology: 0, health: 0, science: 0 } 
     };
   }
 
   fetchNews = async (category, author = "") => {
     this.setState({ loading: true });
-    
+
     let apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6a8c53491d80475ca792b5cf5217f256`;
-    
-    // If searching by author, modify the API URL
+
     if (author) {
       apiUrl = `https://newsapi.org/v2/everything?q=${author}&apiKey=6a8c53491d80475ca792b5cf5217f256`;
     }
 
     let data = await fetch(apiUrl);
     let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, loading: false });
+    
+    // Filter out articles missing title, description, or url
+    const validArticles = parsedData.articles.filter(
+      article => article.title && article.description && article.url
+    );
+
+    this.setState({ articles: validArticles, loading: false });
   };
 
   componentDidMount() {
@@ -79,7 +84,7 @@ export class News extends Component {
                     <NewsCard
                       title={element.title ? element.title.slice(0, 40) : "No Title"}
                       description={element.description ? element.description : "No Description"}
-                      imageurl={element.urlToImage || "default_image_url.jpg"}
+                      imageurl={element.urlToImage || "default_image_url.png"}
                       publishedAt={element.publishedAt ? new Date(element.publishedAt).toLocaleDateString() : "Unknown"}
                       content={element.content || "No Content"}
                       author={element.author || "Unknown"}

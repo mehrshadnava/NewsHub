@@ -10,7 +10,9 @@ export const SidePanel = ({ handleAuthorSearch }) => {
   };
 
   const handleSearchClick = () => {
-    handleAuthorSearch(searchTerm); // Call parent function to handle author search
+    if (searchTerm.trim()) {
+      handleAuthorSearch(searchTerm.trim());
+    }
   };
 
   return (
@@ -32,15 +34,17 @@ export const SidePanel = ({ handleAuthorSearch }) => {
       </div>
       <h5>Popular Authors</h5>
       <ul className="list-group">
-        {authors.map((author, index) => (
-          <li
-            key={index}
-            className="list-group-item"
-            style={{ cursor: "pointer" }}
-            onClick={() => handleAuthorSearch(author)}
-          >
-            {author}
-          </li>
+        {authors
+          .filter(author => author.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map((author, index) => (
+            <li
+              key={index}
+              className="list-group-item"
+              style={{ cursor: "pointer" }}
+              onClick={() => handleAuthorSearch(author)}
+            >
+              {author}
+            </li>
         ))}
       </ul>
     </div>
