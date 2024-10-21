@@ -1,16 +1,12 @@
-import React from "react"
-import {useLocation, useNavigate} from 'react-router-dom';
+import React from 'react';
+import News from './News'; // Import your News component
 
-function Home (){
-    const location=useLocation()
-
+function Home() {
     return (
-        <div className="homepage">
-
-            <h1>Hello {location.state.id} and welcome to the home</h1>
-
+        <div>
+            <News /> {/* Render the News component */}
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;
