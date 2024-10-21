@@ -1,15 +1,22 @@
-import "./App.css";
-import React, { Component } from "react";
-import News from "./Components/News";
-import Translate from "./Components/Translate";
+// import './App.css'
+import Home from "./Components/Home"
+import Login from "./Components/Login"
+import Signup from "./Components/Signup"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from 'react';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <Translate></Translate>
-        <News></News>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/Signup" element={<Signup/>}/>
+          <Route path="/Home" element={<Home/>}/>
+        </Routes>
+      </Router>
+    </div>
+  );
 }
+
+export default App;
