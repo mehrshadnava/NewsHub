@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import './Login.css'; // Import the CSS file for styling
 
 function Login() {
     const navigate = useNavigate();
@@ -24,25 +25,36 @@ function Login() {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
+        <div className="login-container">
+            {/* Left side with branding */}
+            <div className="login-left">
+                <h1>NH News Hub</h1>
+                <p>Building The Future....</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore officia, quae, animi distinctio sit mollitia exercitationem earum quos dolores consequatur aliquid harum.</p>
+            </div>
 
-            <p>Don't have an account? <Link to="/signup">Signup here</Link></p>
+            {/* Right side login form */}
+            <div className="login-box">
+                <h2>Welcome Back</h2>
+                <form onSubmit={handleSubmit} className="login-form">
+                    <input
+                        type="email"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit">Continue</button>
+                </form>
+
+
+                <p>Don't have an account? <Link to="/signup">Signup here</Link></p>
+            </div>
         </div>
     );
 }
