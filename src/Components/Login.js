@@ -28,9 +28,11 @@ function Login() {
         <div className="login-container">
             {/* Left side with branding */}
             <div className="login-left">
-                <h1>NH News Hub</h1>
+                <h1> News Hub</h1>
                 <p>Building The Future....</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore officia, quae, animi distinctio sit mollitia exercitationem earum quos dolores consequatur aliquid harum.</p>
+                <p>We bring you the latest and most comprehensive coverage on everything that matters. From breaking news across the nation to in-depth analyses by leading columnists, our platform keeps you informed on every front. Stay updated with the latest sports scores, trends in business, insights from the world of entertainment, and thought-provoking blogs and opinions. Whether it's the pulse of politics or the thrill of your favorite sports event, we've got it all in one place. Dive into the news that shapes India today!
+
+</p>
             </div>
 
             {/* Right side login form */}

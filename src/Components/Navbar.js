@@ -55,7 +55,7 @@ export class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#" onClick={() => handleCategoryChange("recommended")}>
-                 <b> Recommended</b>
+                 <b> Updates</b>
                 </a> {/* New Recommended link */}
               </li>
             </ul>

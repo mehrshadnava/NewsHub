@@ -73,11 +73,10 @@
 .signup-form a:hover {
     text-decoration: underline;
 }
-
 /* Right side - Image container */
 .signup-image {
     width: 40%; /* Takes up the remaining space */
-    height: 100px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +86,9 @@
 
 .signup-image img {
     width: 100%;
-    height: auto;
+    height: 100%; /* Ensures the image fills the container */
     border-radius: 8px;
-    object-fit: cover; /* Ensures the image fits nicely */
+    object-fit: cover; 
 }
+
+

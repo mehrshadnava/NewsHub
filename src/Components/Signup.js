@@ -100,10 +100,10 @@ function Signup() {
                     <p>Already have an account? <a href="/login">Login</a></p>
                 </div>
 
-                {/* Right side image */}
                 <div className="signup-image">
-                    <img src="/backgroundLoginImage.png" alt="Signup" />
-                </div>
+    <img src="https://i.pinimg.com/564x/b8/cd/51/b8cd5130bfd048300026faa0475dd97b.jpg" alt="Signup" />
+</div>
+
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewsCard from "./NewsCard";
 import Navbar from "./Navbar";
-import SidePanel from "./SidePanel"; 
+import SidePanel from "./SidePanel";
 
 export class News extends Component {
   constructor() {
@@ -10,29 +10,38 @@ export class News extends Component {
       articles: [], 
       loading: false, 
       category: "general", 
-      author: "",
-      categoryViews: { general: 0, business: 0, sports: 0, technology: 0, health: 0, science: 0 } 
+      searchNews: "", 
+      categoryViews: { 
+        general: 0, 
+        business: 0, 
+        sports: 0, 
+        technology: 0, 
+        health: 0, 
+        science: 0 
+      } 
     };
   }
 
-  fetchNews = async (category, author = "") => {
+  fetchNews = async (category, searchNews = "") => {
     this.setState({ loading: true });
+    const apiKey = "6a8c53491d80475ca792b5cf5217f256";
+    const baseUrl = searchNews
+      ? `https://newsapi.org/v2/everything?q=${searchNews}&sortBy=publishedAt&apiKey=${apiKey}`
+      : `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}`;
 
-    let apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=6a8c53491d80475ca792b5cf5217f256`;
+    try {
+      const response = await fetch(baseUrl);
+      const { articles } = await response.json();
+      const validArticles = articles.filter(
+        ({ title, description, url }) => title && description && url
+      );
 
-    if (author) {
-      apiUrl = `https://newsapi.org/v2/everything?q=${author}&apiKey=6a8c53491d80475ca792b5cf5217f256`;
+      this.setState({ articles: validArticles });
+    } catch (error) {
+      console.error("Failed to fetch news articles:", error);
+    } finally {
+      this.setState({ loading: false });
     }
-
-    let data = await fetch(apiUrl);
-    let parsedData = await data.json();
-    
-    // Filter out articles missing title, description, or url
-    const validArticles = parsedData.articles.filter(
-      article => article.title && article.description && article.url
-    );
-
-    this.setState({ articles: validArticles, loading: false });
   };
 
   componentDidMount() {
@@ -46,7 +55,7 @@ export class News extends Component {
     
     this.setState(prevState => ({
       category,
-      author: "", // Reset author when category changes
+      searchNews: "",
       categoryViews: {
         ...prevState.categoryViews,
         [category]: prevState.categoryViews[category] + 1,
@@ -56,44 +65,50 @@ export class News extends Component {
     });
   };
 
-  handleAuthorSearch = (author) => {
-    this.setState({ author }, () => {
-      this.fetchNews(this.state.category, author); // Fetch news based on author
+  handleSearchNewsChange = (searchNews) => {
+    this.setState({ searchNews }, () => {
+      this.fetchNews(this.state.category, searchNews);
     });
   };
 
   getMostViewedCategory = () => {
     const { categoryViews } = this.state;
-    return Object.keys(categoryViews).reduce((a, b) => categoryViews[a] > categoryViews[b] ? a : b);
+    return Object.keys(categoryViews).reduce((a, b) => 
+      categoryViews[a] > categoryViews[b] ? a : b
+    );
   };
 
   render() {
+    const { articles, loading, category, searchNews } = this.state;
+
     return (
       <div className="d-flex">
-        <SidePanel handleAuthorSearch={this.handleAuthorSearch} /> {/* Pass handleAuthorSearch */}
+        <SidePanel handleSearchNewsChange={this.handleSearchNewsChange} />
         
         <div className="flex-grow-1">
           <Navbar handleCategoryChange={this.handleCategoryChange} />
           
           <div className="container my-3">
-            <h2>News App - {this.state.author ? `Articles by ${this.state.author}` : `${this.state.category.toUpperCase()} News`}</h2>
-            <div className="row">
-              {this.state.articles.map((element) => {
-                return (
-                  <div className="col-md-4 my-3" key={element.url}>
+            <h2>News App - {searchNews ? `Articles by ${searchNews}` : `${category.toUpperCase()} News`}</h2>
+            {loading ? (
+              <p>Loading articles...</p>
+            ) : (
+              <div className="row">
+                {articles.map(({ url, title, description, urlToImage, publishedAt, content, author }) => (
+                  <div className="col-md-4 my-3" key={url}>
                     <NewsCard
-                      title={element.title ? element.title.slice(0, 40) : "No Title"}
-                      description={element.description ? element.description : "No Description"}
-                      imageurl={element.urlToImage || "default_image_url.png"}
-                      publishedAt={element.publishedAt ? new Date(element.publishedAt).toLocaleDateString() : "Unknown"}
-                      content={element.content || "No Content"}
-                      author={element.author || "Unknown"}
-                      url={element.url}
+                      title={title.slice(0, 40) || "No Title"}
+                      description={description || "No Description"}
+                      imageurl={urlToImage || "default_image_url.png"}
+                      publishedAt={publishedAt ? new Date(publishedAt).toLocaleDateString() : "Unknown"}
+                      content={content || "No Content"}
+                      author={author || "Unknown"}
+                      url={url}
                     />
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
