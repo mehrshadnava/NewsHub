@@ -1,10 +1,13 @@
 import React from 'react';
-import News from './News'; // Import your News component
+import News from './News'; 
+import Translate from './Translate'
 
 function Home() {
     return (
         <div>
-            <News /> {/* Render the News component */}
+            <News></News>
+            <Translate></Translate> 
+            
         </div>
     );
 }

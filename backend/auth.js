@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('./models/Users'); // Ensure the path is correct
+const User = require('./models/Users'); 
 const router = express.Router();
 
 // Signup route
