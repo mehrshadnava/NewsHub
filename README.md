@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+NEWS HUB
+This is a full-stack news website built with the MERN (MongoDB, Express.js, React, Node.js) stack. The site allows users to browse news articles from various categories, filter news by keywords, translate articles, view top authors, and access a personalized list of recommended articles based on the most viewed categories.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+News Fetching:
+News articles are fetched from the News API and displayed on the site. Users can browse articles from various sources, view headlines, and read full articles.
 
-## Available Scripts
+Google Translate Integration:
+The website provides an option to translate news articles into different languages using the Google Translate API. Users can select their preferred language to translate the content instantly.
 
-In the project directory, you can run:
+Keyword Filtering:
+Users can filter news articles based on specific keywords. This feature allows users to narrow down the articles displayed according to their interests or current trending topics.
 
-### `npm start`
+Category Filtering:
+The news articles can be filtered by category (e.g., technology, business, sports, etc.). Users can browse articles by selecting from various categories listed on the website.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Recommended Section:
+A personalized "Recommended" section is available, which displays the most-viewed news categories. This helps users easily access trending categories that have been viewed the most by others.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dynamic Top Authors:
+The website dynamically retrieves and displays a list of top authors. Users can filter news articles based on these authors, allowing them to follow content from their favorite writers.
 
-### `npm test`
+Author-Based News Filtering:
+Users can filter the news based on specific authors. By selecting an author from the top authors list, they can view articles published by that author only.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Installation
+Clone the repository:
+git clone https://github.com/mehrshadnava/NewsHub.git
 
-### `npm run build`
+Navigate to the project directory:
+cd mern-news-website
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install dependencies for both the server and the client:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm install
+cd client
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
 
-### `npm run eject`
+Create a .env file in the root directory and add your API keys:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+NEWS_API_KEY=your_news_api_key
+GOOGLE_TRANSLATE_API_KEY=your_google_translate_api_key
+Start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Folder Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Backend (Express):
+login and signup using mongo db.
+Fetches data from the News API.
+Handles filtering and query logic for authors, categories, and keywords.
+Exposes API endpoints to the frontend.
 
-## Learn More
+Frontend (React):
+Displays news articles and allows filtering by keyword, category, and author.
+Integrates Google Translate API for article translation.
+Provides a recommended section based on most-viewed categories.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+API Usage
+News API:
+The News API is used to retrieve the latest news articles. The backend server queries the API and provides the data to the frontend.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Google Translate API:
+Articles can be translated on the fly using the Google Translate API. Users can choose their preferred language, and the content is translated accordingly.
 
-### Code Splitting
+How to Use
+Browse News:
+Upon landing on the website, users can see a list of the latest news articles. The news can be browsed by categories, searched by keywords, or filtered by top authors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Filter by Keywords:
+Users can enter keywords in the search bar to filter articles containing those terms.
 
-### Analyzing the Bundle Size
+Filter by Category:
+Users can select from a variety of categories to view articles within a specific topic of interest.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+View Recommended:
+The recommended section displays the most-viewed categories based on site traffic. Users can click on these categories to quickly browse trending news.
 
-### Making a Progressive Web App
+Translate Articles:
+Clicking on the translate option allows users to view the article in their preferred language using Google Translate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+View Articles by Authors:
+Users can browse articles by top authors and filter news accordingly. This helps users follow their favorite journalists or writers.
 
-### Advanced Configuration
+Dependencies
+Backend:
+express: Fast, unopinionated, minimalist web framework for Node.js.
+axios: Promise-based HTTP client for the browser and Node.js.
+dotenv: Loads environment variables from .env file.
+Frontend:
+react: JavaScript library for building user interfaces.
+react-router-dom: Declarative routing for React applications.
+axios: To make API requests to the backend.
+bootstrap: Frontend framework for responsive design.
+License
+this project is created by Mehrshad nava and Aiman
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Acknowledgements
+News API for providing up-to-date news articles.
+Google Cloud for the translation service.
